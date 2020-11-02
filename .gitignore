@@ -3,12 +3,12 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 /[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+/MoonShot/[Tt]emp/
+/MoonShot/[Oo]bj/
+/MoonShot/[Bb]uild/
+/MoonShot/[Bb]uilds/
+/MoonShot/[Ll]ogs/
+/MoonShot/[Mm]emoryCaptures/
 /MoonShot/Library/
 
 # Never ignore Asset meta data
