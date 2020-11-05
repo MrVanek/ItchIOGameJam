@@ -45,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
 
+        if (Mathf.Abs(hMovement) < 0.1f) hMovement = 0;
+        if (Mathf.Abs(vMovement) < 0.1f) vMovement = 0;
+
         Vector3 moveDirection = new Vector3(hMovement * moveSpeed, 0f, vMovement * moveSpeed);
 
         //setting up where forward is based on the camera
