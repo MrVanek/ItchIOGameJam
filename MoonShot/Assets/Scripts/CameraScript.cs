@@ -7,14 +7,6 @@ public class CameraScript : MonoBehaviour
     public Transform chase;
     public Transform player;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-
     void LateUpdate()
     {
         transform.position = chase.position;

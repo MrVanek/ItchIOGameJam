@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,30 +13,45 @@ public class PlayerMovement : MonoBehaviour
     public float lowMultiplier = 2f;
 
     private bool jumping = false;
-    private float extraJumpDistance = .75f;
+    public float extraJumpDistance = 5f;
     private Rigidbody rb;
-    private bool canJump = true;
+    public bool canJump = true;
     private float hMovement, vMovement, distanceToTheGround;
+    private Animator anim;
+    private bool reachedApex = false;
+    public bool canCheckJump = true;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        distanceToTheGround = GetComponentInChildren<Collider>().bounds.extents.y;
+        anim = GetComponentInChildren<Animator>();
+        distanceToTheGround = GetComponent<CapsuleCollider>().bounds.extents.y;
     }
     private void Update()
     {
-        hMovement = Input.GetAxis("Horizontal");
-        vMovement = Input.GetAxis("Vertical");
+        CheckAnalogInputs();
+        CheckButtonInputs();
+    }
 
+    private void CheckButtonInputs()
+    {
         if (Input.GetButtonDown("Jump"))
         {
             jumping = true;
-        } else if (Input.GetButtonUp("Jump"))
+        }
+        else if (Input.GetButtonUp("Jump"))
         {
             jumping = false;
         }
     }
+
+    private void CheckAnalogInputs()
+    {
+        hMovement = Input.GetAxis("Horizontal");
+        vMovement = Input.GetAxis("Vertical");
+    }
+
     void FixedUpdate()
     {
         MovePlayer();
@@ -47,7 +63,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (Mathf.Abs(hMovement) < 0.1f) hMovement = 0;
         if (Mathf.Abs(vMovement) < 0.1f) vMovement = 0;
-
+        if (hMovement == 0 && vMovement == 0)
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            anim.SetBool("Moving", false);
+        } else
+        {
+            anim.SetBool("Moving", true);
+        }
+        
         Vector3 moveDirection = new Vector3(hMovement * moveSpeed, 0f, vMovement * moveSpeed);
 
         //setting up where forward is based on the camera
@@ -58,10 +82,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 lookRotation = Vector3.RotateTowards(transform.forward, newFacing, rotateSpeed, 0f);
         rb.MoveRotation(Quaternion.LookRotation(lookRotation));
 
-
-
         rb.MovePosition(transform.position + (newFacing * Time.deltaTime));
-
+      
     }
 
     private void JumpPlayer()
@@ -70,25 +92,48 @@ public class PlayerMovement : MonoBehaviour
         
         if (rb.velocity.y < 0)
         {
+            if (anim.speed == 0 && !reachedApex)
+            {
+                anim.speed = 1;
+                reachedApex = true;
+            }
             rb.velocity += Vector3.up * Physics.gravity.y * fallMultiplier * Time.deltaTime;
+            canCheckJump = true;
         }
         else if (rb.velocity.y > 0 && !jumping)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * lowMultiplier * Time.deltaTime;
         }
 
-
-
-        if (!canJump && rb.velocity.y <= 0)
+        if (canCheckJump && !canJump && rb.velocity.y <= 0)
         {
-            canJump = Physics.Raycast(transform.position, Vector3.down, distanceToTheGround + extraJumpDistance);
-        }
+           
+            float total = distanceToTheGround + extraJumpDistance;
+            Debug.DrawRay(transform.position, Vector3.down * total, Color.yellow);
+
+            LayerMask mask = LayerMask.GetMask("Arena");
+            canJump = Physics.Raycast(transform.position, Vector3.down, total, mask);
+            
+
+            if (canJump)
+            {
+                anim.SetBool("Jumping", false);
+                anim.speed = 1;
+                reachedApex = false;
+            }
+       }
 
         if (jumping && canJump)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+            anim.SetBool("Jumping", true);
             canJump = false;
+            canCheckJump = false;
         }
+    }
+
+    public void AddJumpForce()
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
     }
 }
 

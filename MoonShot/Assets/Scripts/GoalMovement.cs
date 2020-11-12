@@ -9,18 +9,13 @@ public class GoalMovement : MonoBehaviour
     public float moveSpeed = 0.5f;
     public float moveAmount = 3f;
 
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (movingUp && movementCount < moveAmount)
         {
             transform.position = transform.position + new Vector3(0, moveSpeed * Time.deltaTime, 0);
-            movementCount += moveSpeed + Time.deltaTime;
+            movementCount += moveSpeed * Time.deltaTime;
             if (movementCount >= moveAmount)
             {
                 movingUp = false;
@@ -30,7 +25,7 @@ public class GoalMovement : MonoBehaviour
         else if (!movingUp && movementCount < moveAmount)
         {
             transform.position = transform.position + new Vector3(0, -moveSpeed * Time.deltaTime, 0);
-            movementCount += moveSpeed + Time.deltaTime;
+            movementCount += moveSpeed * Time.deltaTime;
             if (movementCount >= moveAmount)
             {
                 movingUp = true;

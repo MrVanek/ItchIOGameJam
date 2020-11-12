@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,34 +11,36 @@ public class BallHandling : MonoBehaviour
     private bool canGetBall = true;
     private GameObject ball;
     private float count = 0;
-
-    void Start()
-    {
-        
-    }
+    public ScoreHandling gamestate;
 
 
     void Update()
     {
-        //Debug.Log(hasBall);
+        //if (!gamestate.gameOver)
+            ThrowBall();
+    }
+
+    private void ThrowBall()
+    {
         if (hasBall)
         {
             ball.transform.position = ballSpot.position;
-
+            ball.transform.rotation = transform.rotation;
             if (Input.GetButtonDown("Throw"))
             {
-                Debug.Log("Throwing");
+                // Debug.Log("Throwing");
                 hasBall = false;
                 Rigidbody rb = ball.GetComponent<Rigidbody>();
                 rb.useGravity = true;
                 rb.detectCollisions = true;
-                rb.transform.position = rb.gameObject.transform.position + new Vector3(0, 0, 1);   
-                rb.AddForce(transform.forward,ForceMode.Impulse);
+                rb.transform.position = rb.gameObject.transform.position + (transform.forward);
+
+                //     Vector3 forward = yPivot.transform.TransformDirection(moveDirection);
+                rb.AddForce(ball.transform.forward * throwSpeed, ForceMode.Impulse);
                 StartCoroutine("ballWait");
             }
         }
     }
-
 
     private IEnumerator ballWait()
     {
@@ -54,6 +57,7 @@ public class BallHandling : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.tag == "Ball" && canGetBall)
         {
             Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
@@ -64,6 +68,7 @@ public class BallHandling : MonoBehaviour
             hasBall = true;
             canGetBall = false;
         }
-        
     }
+
 }
+
