@@ -12,8 +12,12 @@ public class BallHandling : MonoBehaviour
     private GameObject ball;
     private float count = 0;
     public ScoreHandling gamestate;
+    private Animator anim;
 
-
+    private void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
     void Update()
     {
         //if (!gamestate.gameOver)
@@ -24,24 +28,30 @@ public class BallHandling : MonoBehaviour
     {
         if (hasBall)
         {
+            
             ball.transform.position = ballSpot.position;
             ball.transform.rotation = transform.rotation;
             if (Input.GetButtonDown("Throw"))
             {
+                anim.SetBool("Throwing", true);
                 // Debug.Log("Throwing");
-                hasBall = false;
-                Rigidbody rb = ball.GetComponent<Rigidbody>();
-                rb.useGravity = true;
-                rb.detectCollisions = true;
-                rb.transform.position = rb.gameObject.transform.position + (transform.forward);
-
-                //     Vector3 forward = yPivot.transform.TransformDirection(moveDirection);
-                rb.AddForce(ball.transform.forward * throwSpeed, ForceMode.Impulse);
-                StartCoroutine("ballWait");
+             
             }
         }
     }
 
+    public void ReleaseBall()
+    {
+        hasBall = false;
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.detectCollisions = true;
+        rb.transform.position = rb.gameObject.transform.position + (transform.forward);
+
+        //     Vector3 forward = yPivot.transform.TransformDirection(moveDirection);
+        rb.AddForce(ball.transform.forward * throwSpeed, ForceMode.Impulse);
+        StartCoroutine("ballWait");
+    }
     private IEnumerator ballWait()
     {
         count = 0;

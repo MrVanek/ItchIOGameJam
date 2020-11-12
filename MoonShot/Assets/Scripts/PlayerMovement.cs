@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private bool reachedApex = false;
     public bool canCheckJump = true;
+    public bool canMove = true;
 
 
     void Start()
@@ -32,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckAnalogInputs();
         CheckButtonInputs();
+        if (Input.GetKeyDown("space"))
+        {
+            anim.SetTrigger("Fall");
+            anim.speed = 1;
+            canMove = false;
+        }
     }
 
     private void CheckButtonInputs()
@@ -54,8 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        MovePlayer();
-        JumpPlayer();
+        if (canMove)
+        {
+            MovePlayer();
+            JumpPlayer();
+        }
     }
 
     private void MovePlayer()
@@ -65,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(vMovement) < 0.1f) vMovement = 0;
         if (hMovement == 0 && vMovement == 0)
         {
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
             anim.SetBool("Moving", false);
         } else
         {
@@ -87,9 +97,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void JumpPlayer()
-    {
-
-        
+    { 
         if (rb.velocity.y < 0)
         {
             if (anim.speed == 0 && !reachedApex)
@@ -113,19 +121,20 @@ public class PlayerMovement : MonoBehaviour
 
             LayerMask mask = LayerMask.GetMask("Arena");
             canJump = Physics.Raycast(transform.position, Vector3.down, total, mask);
-            
 
             if (canJump)
             {
-                anim.SetBool("Jumping", false);
+                
                 anim.speed = 1;
                 reachedApex = false;
             }
        }
 
+
+
         if (jumping && canJump)
         {
-            anim.SetBool("Jumping", true);
+            anim.SetTrigger("Jump");
             canJump = false;
             canCheckJump = false;
         }
