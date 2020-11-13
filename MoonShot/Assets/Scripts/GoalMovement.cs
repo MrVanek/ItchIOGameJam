@@ -9,9 +9,20 @@ public class GoalMovement : MonoBehaviour
     public float moveSpeed = 0.5f;
     public float moveAmount = 3f;
 
+    private void Start()
+    {
+        if (GetComponentInParent<EdgeLineValues>() != null)
+        {
+            EdgeLineValues elv = GetComponentInParent<EdgeLineValues>();
+            moveSpeed = elv.moveSpeed;
+            moveAmount = elv.moveAmount;
+        }
+    }
 
     void Update()
     {
+
+
         if (movingUp && movementCount < moveAmount)
         {
             transform.position = transform.position + new Vector3(0, moveSpeed * Time.deltaTime, 0);

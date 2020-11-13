@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         distanceToTheGround = GetComponent<CapsuleCollider>().bounds.extents.y;

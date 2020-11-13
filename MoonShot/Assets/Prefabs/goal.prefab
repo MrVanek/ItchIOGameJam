@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 382295940}
   - component: {fileID: 382295941}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Area Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 210230185}
   - component: {fileID: 1826342666338664745}
   - component: {fileID: 1826342666338664744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: goal
   m_TagString: Player1Goal
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -2432090755550338912, guid: 8f643e697f726ec4fb3efa6c00963a5d, type: 3}
 --- !u!65 &1826342666338664745
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5039923e102c24db9743d5642ebb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.25
-  moveAmount: 20
+  moveSpeed: 0.75
+  moveAmount: 1
 --- !u!1 &1826342666551346150
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 1826342666551346151}
   - component: {fileID: 1826342666551346149}
   - component: {fileID: 1826342666551346148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: dot particless
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4993,7 +4993,7 @@ GameObject:
   - component: {fileID: 1826342667289171751}
   - component: {fileID: 1826342667289171749}
   - component: {fileID: 1826342667289171748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: fire1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9805,7 +9805,7 @@ GameObject:
   - component: {fileID: 1826342667548821301}
   - component: {fileID: 1826342667548821307}
   - component: {fileID: 1826342667548821306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: fire1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14617,7 +14617,7 @@ GameObject:
   - component: {fileID: 1826342667574842906}
   - component: {fileID: 1826342667574842904}
   - component: {fileID: 1826342667574842907}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Interal system
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19431,7 +19431,7 @@ GameObject:
   - component: {fileID: 1631136174190523621}
   - component: {fileID: 4500744097053035951}
   - component: {fileID: 1103488321342630203}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
