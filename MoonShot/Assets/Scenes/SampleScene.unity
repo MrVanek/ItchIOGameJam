@@ -710,6 +710,7 @@ MonoBehaviour:
   extraJumpDistance: 0.25
   canJump: 1
   canCheckJump: 1
+  canMove: 1
 --- !u!114 &449066592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +893,7 @@ MonoBehaviour:
   extraJumpDistance: 5
   canJump: 1
   canCheckJump: 1
+  canMove: 1
 --- !u!54 &536034984
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1424,7 +1426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.990566, g: 0.2840868, b: 0.29053798, a: 1}
+  m_Color: {r: 0.41213953, g: 0.44094175, b: 0.9622642, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13154,6 +13156,18 @@ PrefabInstance:
     - target: {fileID: 8436493288899548979, guid: 278d36436afcaf140bf9a7e1bca39676, type: 3}
       propertyPath: m_Name
       value: Blue Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778949588604298458, guid: 278d36436afcaf140bf9a7e1bca39676, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778949588604298458, guid: 278d36436afcaf140bf9a7e1bca39676, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0051
+      objectReference: {fileID: 0}
+    - target: {fileID: 8778949588604298458, guid: 278d36436afcaf140bf9a7e1bca39676, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8989732702046550541, guid: 278d36436afcaf140bf9a7e1bca39676, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

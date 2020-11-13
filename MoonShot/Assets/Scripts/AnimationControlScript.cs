@@ -27,17 +27,19 @@ public class AnimationControlScript : MonoBehaviour
     {
         if (!pm.canJump)
         {
-            anim.speed = 0;
+
+            anim.SetFloat("speedMultiplier", 0f);
         }
     }
-    void GetUp()
+    void AllowMove()
     {
         pm.canMove = true;
     }
 
     void StartAnimation()
     {
-        anim.speed = 1;
+        anim.SetFloat("speedMultiplier", 1f);
+        //anim.speed = 1;
     }
     void ReleaseBall()
     {

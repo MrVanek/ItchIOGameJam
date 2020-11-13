@@ -33,7 +33,7 @@ public class BallHandling : MonoBehaviour
             ball.transform.rotation = transform.rotation;
             if (Input.GetButtonDown("Throw"))
             {
-                anim.SetBool("Throwing", true);
+                anim.SetTrigger("Throw");
                 // Debug.Log("Throwing");
              
             }

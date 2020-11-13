@@ -36,7 +36,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             anim.SetTrigger("Fall");
-            anim.speed = 1;
+            anim.SetFloat("speedMultiplier", 1f);
+            //anim.speed = 1;
             canMove = false;
         }
     }
@@ -100,9 +101,12 @@ public class PlayerMovement : MonoBehaviour
     { 
         if (rb.velocity.y < 0)
         {
-            if (anim.speed == 0 && !reachedApex)
+            //if (anim.speed == 0 && !reachedApex)
+
+            if (anim.GetFloat("speedMultiplier") == 0f && !reachedApex)
             {
-                anim.speed = 1;
+                anim.SetFloat("speedMultiplier", 0f);
+                //anim.speed = 1;
                 reachedApex = true;
             }
             rb.velocity += Vector3.up * Physics.gravity.y * fallMultiplier * Time.deltaTime;
@@ -124,8 +128,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (canJump)
             {
-                
-                anim.speed = 1;
+                anim.SetFloat("speedMultiplier", 1f);
+
+                //anim.speed = 1;
                 reachedApex = false;
             }
        }
