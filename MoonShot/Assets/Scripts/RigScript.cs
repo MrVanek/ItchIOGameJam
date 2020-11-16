@@ -29,9 +29,9 @@ public class RigScript : MonoBehaviour
         Vector3 xRotation = xPivot.transform.eulerAngles;
 
 
-        yRotation.y += hRotation * rotationSpeed;
+        yRotation.y += hRotation * rotationSpeed * Time.deltaTime;
 
-        xRotation.x += vRotation * rotationSpeed;
+        xRotation.x += vRotation * rotationSpeed * Time.deltaTime;
         xRotation.y = yRotation.y;
 
 

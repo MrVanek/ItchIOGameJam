@@ -11,16 +11,17 @@ public class PlayerMovement : MonoBehaviour
     public Transform yPivot;
     public float fallMultiplier = 1.5f;
     public float lowMultiplier = 2f;
-
-    private bool jumping = false;
     public float extraJumpDistance = 5f;
-    private Rigidbody rb;
+
+
     public bool canJump = true;
-    private float hMovement, vMovement, distanceToTheGround;
-    private Animator anim;
-    private bool reachedApex = false;
-    public bool canCheckJump = true;
+    private bool canCheckJump = true;
     public bool canMove = true;
+    private Rigidbody rb;
+    private Animator anim;
+    private float hMovement, vMovement, distanceToTheGround;
+    private bool reachedApex = false;
+    private bool jumping = false;
 
 
     void Start()
@@ -38,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("Fall");
             anim.SetFloat("speedMultiplier", 1f);
-            //anim.speed = 1;
             canMove = false;
         }
     }
@@ -79,11 +79,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
             anim.SetBool("Moving", false);
-        } else
+        }
+        else
         {
             anim.SetBool("Moving", true);
         }
-        
+
         Vector3 moveDirection = new Vector3(hMovement * moveSpeed, 0f, vMovement * moveSpeed);
 
         //setting up where forward is based on the camera
@@ -95,19 +96,16 @@ public class PlayerMovement : MonoBehaviour
         rb.MoveRotation(Quaternion.LookRotation(lookRotation));
 
         rb.MovePosition(transform.position + (newFacing * Time.deltaTime));
-      
+
     }
 
     private void JumpPlayer()
-    { 
+    {
         if (rb.velocity.y < 0)
         {
-            //if (anim.speed == 0 && !reachedApex)
-
             if (anim.GetFloat("speedMultiplier") == 0f && !reachedApex)
             {
                 anim.SetFloat("speedMultiplier", 0f);
-                //anim.speed = 1;
                 reachedApex = true;
             }
             rb.velocity += Vector3.up * Physics.gravity.y * fallMultiplier * Time.deltaTime;
@@ -120,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (canCheckJump && !canJump && rb.velocity.y <= 0)
         {
-           
+
             float total = distanceToTheGround + extraJumpDistance;
             Debug.DrawRay(transform.position, Vector3.down * total, Color.yellow);
 
@@ -130,11 +128,9 @@ public class PlayerMovement : MonoBehaviour
             if (canJump)
             {
                 anim.SetFloat("speedMultiplier", 1f);
-
-                //anim.speed = 1;
                 reachedApex = false;
             }
-       }
+        }
 
 
 
