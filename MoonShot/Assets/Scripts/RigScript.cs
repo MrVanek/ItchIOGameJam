@@ -12,6 +12,8 @@ public class RigScript : MonoBehaviour
     public float maxRotation = 45f;
     public float minRotation = -20f;
 
+    public int playerNumber = 1;
+
 
     void Update()
     {
@@ -22,8 +24,8 @@ public class RigScript : MonoBehaviour
     {
         transform.position = player.position;
 
-        float hRotation = Input.GetAxis("RHorizontal");
-        float vRotation = Input.GetAxis("RVertical");
+        float hRotation = Input.GetAxis("P" + playerNumber.ToString() + "RHorizontal");
+        float vRotation = Input.GetAxis("P" + playerNumber.ToString() + "RVertical");
 
         Vector3 yRotation = yPivot.transform.eulerAngles;
         Vector3 xRotation = xPivot.transform.eulerAngles;

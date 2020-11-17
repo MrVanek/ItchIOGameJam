@@ -34,7 +34,7 @@ public class LoadScreen : MonoBehaviour
 
     private void GoBack()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("P1Jump"))
         {
             SceneManager.LoadScene(0);
         }
@@ -42,7 +42,7 @@ public class LoadScreen : MonoBehaviour
 
     private void SwitchScreens()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("P1Jump"))
         {
             if (selected == 0)
             {
@@ -98,7 +98,7 @@ public class LoadScreen : MonoBehaviour
 
     private void DealWithInputs()
     {
-        if (Input.GetAxisRaw("Vertical") < -0.08f && canSelect)
+        if (Input.GetAxisRaw("P1Vertical") < -0.08f && canSelect)
         {
             selected++;
             if (selected > 2)
@@ -107,7 +107,7 @@ public class LoadScreen : MonoBehaviour
             }
             canSelect = false;
         }
-        else if (Input.GetAxisRaw("Vertical") > 0.08f && canSelect)
+        else if (Input.GetAxisRaw("P1Vertical") > 0.08f && canSelect)
         {
             selected--;
             if (selected < 0)
@@ -116,7 +116,7 @@ public class LoadScreen : MonoBehaviour
             }
             canSelect = false;
         }
-        else if (Input.GetAxisRaw("Vertical") > -0.08f && Input.GetAxisRaw("Vertical") < 0.08f && !canSelect)
+        else if (Input.GetAxisRaw("P1Vertical") > -0.08f && Input.GetAxisRaw("P1Vertical") < 0.08f && !canSelect)
         {
             canSelect = true;
         }

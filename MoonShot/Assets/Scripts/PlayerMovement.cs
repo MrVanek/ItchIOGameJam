@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 1.5f;
     public float lowMultiplier = 2f;
     public float extraJumpDistance = 5f;
-
+    public int playerNumber = 1;
 
     public bool canJump = true;
     private bool canCheckJump = true;
@@ -45,11 +45,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckButtonInputs()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("P" + playerNumber.ToString() + "Jump"))
         {
             jumping = true;
         }
-        else if (Input.GetButtonUp("Jump"))
+        else if (!Input.GetButton("P" + playerNumber.ToString() + "Jump"))
         {
             jumping = false;
         }
@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckAnalogInputs()
     {
-        hMovement = Input.GetAxis("Horizontal");
-        vMovement = Input.GetAxis("Vertical");
+        hMovement = Input.GetAxis("P" + playerNumber.ToString() + "Horizontal");
+        vMovement = Input.GetAxis("P" + playerNumber.ToString() + "Vertical");
     }
 
     void FixedUpdate()
@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-
+        
         if (Mathf.Abs(hMovement) < 0.1f) hMovement = 0;
         if (Mathf.Abs(vMovement) < 0.1f) vMovement = 0;
         if (hMovement == 0 && vMovement == 0)
@@ -95,12 +95,22 @@ public class PlayerMovement : MonoBehaviour
         Vector3 lookRotation = Vector3.RotateTowards(transform.forward, newFacing, rotateSpeed, 0f);
         rb.MoveRotation(Quaternion.LookRotation(lookRotation));
 
-        rb.MovePosition(transform.position + (newFacing * Time.deltaTime));
+        //rb.MovePosition(transform.position + (newFacing * Time.deltaTime));
+
+        
+        Vector3 direction = (transform.position + (newFacing * Time.deltaTime)) - transform.position;
+        Ray ray = new Ray(transform.position, direction);
+        RaycastHit hit;
+        if (!Physics.Raycast(ray, out hit, direction.magnitude))
+            rb.MovePosition(transform.position + (newFacing * Time.deltaTime));
+        else
+            rb.MovePosition(hit.point);
 
     }
 
     private void JumpPlayer()
     {
+  
         if (rb.velocity.y < 0)
         {
             if (anim.GetFloat("speedMultiplier") == 0f && !reachedApex)
@@ -129,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetFloat("speedMultiplier", 1f);
                 reachedApex = false;
+                jumping = false;
             }
         }
 

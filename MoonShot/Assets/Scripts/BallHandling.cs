@@ -11,7 +11,8 @@ public class BallHandling : MonoBehaviour
     public GameObject crosshairPrefab;
     public Camera myCamera;
 
-
+    private int playerNumber;
+    private PlayerMovement pm;
     private bool hasBall = false;
     private bool canGetBall = true;
     private float maxDistance = 100;
@@ -23,6 +24,8 @@ public class BallHandling : MonoBehaviour
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        pm = GetComponent<PlayerMovement>();
+        playerNumber = pm.playerNumber;
         crosshair = Instantiate(crosshairPrefab);
         ToggleCrosshair(false);
     }
@@ -42,7 +45,7 @@ public class BallHandling : MonoBehaviour
             PositionCrosshair();
             ball.transform.position = ballSpot.position;
             ball.transform.rotation = transform.rotation;
-            if (Input.GetButtonDown("Throw"))
+            if (Input.GetButtonDown("P" + playerNumber.ToString() + "Throw"))
             {
                 anim.SetTrigger("Throw");
             }
