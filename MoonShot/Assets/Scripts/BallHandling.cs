@@ -18,8 +18,8 @@ public class BallHandling : MonoBehaviour
     private float maxDistance = 100;
     private float count = 0;
     private Animator anim;
-    private GameObject ball;
-    private GameObject crosshair;
+    private GameObject ball, crosshair, target;
+    private bool punching = false;
 
     private void Start()
     {
@@ -35,33 +35,58 @@ public class BallHandling : MonoBehaviour
     void Update()
     {
         if (!gamestate.gameOver)
-            ThrowBall();
+        {
+
+            if (Input.GetButtonDown("P" + playerNumber.ToString() + "Throw"))
+            {
+                anim.SetTrigger("Throw");
+            }
+
+            CarryBall();
+        }
     }
 
-    private void ThrowBall()
+    private void CarryBall()
     {
         if (hasBall)
         {
             PositionCrosshair();
             ball.transform.position = ballSpot.position;
             ball.transform.rotation = transform.rotation;
-            if (Input.GetButtonDown("P" + playerNumber.ToString() + "Throw"))
-            {
-                anim.SetTrigger("Throw");
-            }
         }
     }
 
     public void ReleaseBall()
     {
-        ToggleCrosshair(false);
-        hasBall = false;
-        Rigidbody rb = ball.GetComponent<Rigidbody>();
-        rb.useGravity = true;
-        rb.detectCollisions = true;
-        rb.transform.position = rb.gameObject.transform.position + (transform.forward);
-        rb.AddForce(ball.transform.forward * throwSpeed, ForceMode.Impulse);
-        StartCoroutine("ballWait");
+        if (hasBall)
+        {
+            ToggleCrosshair(false);
+            hasBall = false;
+            Rigidbody rb = ball.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+            rb.detectCollisions = true;
+            rb.transform.position = rb.gameObject.transform.position + (transform.forward);
+            rb.AddForce(ball.transform.forward * throwSpeed, ForceMode.Impulse);
+            StartCoroutine("ballWait");
+        }
+
+        else if (punching)
+        {
+            if (target.name == "P1Parent" || target.name == "P2Parent")
+            {
+                Animator tarAnim = target.GetComponentInChildren<Animator>();
+                if (!tarAnim.GetCurrentAnimatorStateInfo(0).IsName("Sweep Fall 0") && !tarAnim.GetCurrentAnimatorStateInfo(0).IsName("Zombie Stand Up"))
+                {
+                   tarAnim.SetTrigger("Fall");
+                   tarAnim.SetFloat("speedMultiplier", 1f);
+                   target.GetComponent<PlayerMovement>().canMove = false;
+                    if (target.GetComponent<BallHandling>().hasBall)
+                    {
+                        //launch ball.
+                    }
+                }
+            }
+        }
     }
 
 
@@ -117,5 +142,17 @@ public class BallHandling : MonoBehaviour
     {
         crosshair.SetActive(enabled);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        punching = true;
+        target = other.gameObject;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        punching = false;
+    }
+
 }
 

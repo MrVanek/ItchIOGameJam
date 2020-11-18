@@ -3062,6 +3062,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1362845577}
+  - component: {fileID: 1362845578}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -3083,6 +3084,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1362845578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362845576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca38de7513b82a4e98f746f70f5b457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotateSpeed: 10
+  jumpForce: 6
+  fallMultiplier: 1.5
+  lowMultiplier: 2
+  throwSpeed: 5
+  rotationSpeed: 5
+  maxRotation: 45
+  minRotation: -20
 --- !u!1 &1385790355
 GameObject:
   m_ObjectHideFlags: 0
@@ -4671,6 +4693,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85030f29029c87e40ad73116d2adcc18, type: 3}
   m_PrefabInstance: {fileID: 1941538100}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1966979810 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8778949588604298459, guid: 278d36436afcaf140bf9a7e1bca39676, type: 3}
+  m_PrefabInstance: {fileID: 8778949589352406563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1966979811
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966979810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.025, y: 0.025, z: 0.025}
+  m_Center: {x: 0, y: 0.01, z: 0}
 --- !u!1001 &2014003152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4954,6 +4994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2107727587}
+  - component: {fileID: 2107727588}
   m_Layer: 0
   m_Name: BallSpot
   m_TagString: Untagged
@@ -4975,6 +5016,19 @@ Transform:
   m_Father: {fileID: 464581259}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2107727588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107727586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.025, y: 0.025, z: 0.025}
+  m_Center: {x: 0, y: 0.01, z: 0}
 --- !u!1001 &2136891313
 PrefabInstance:
   m_ObjectHideFlags: 0

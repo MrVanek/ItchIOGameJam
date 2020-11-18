@@ -53,8 +53,7 @@ public class LoadScreen : MonoBehaviour
             }
             else if (selected == 1)
             {
-                //SceneManager.LoadScene(3);
-                //Coming Soon
+                SceneManager.LoadScene(4);
             }
 
             else if (selected == 2)

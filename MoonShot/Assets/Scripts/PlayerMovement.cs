@@ -22,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     private float hMovement, vMovement, distanceToTheGround;
     private bool reachedApex = false;
     private bool jumping = false;
-    private bool punching = false;
 
 
     void Start()
@@ -36,12 +35,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckAnalogInputs();
         CheckButtonInputs();
-        if (Input.GetKeyDown("space"))
-        {
-            anim.SetTrigger("Fall");
-            anim.SetFloat("speedMultiplier", 1f);
-            canMove = false;
-        }
+
     }
 
     private void CheckButtonInputs()
@@ -53,15 +47,6 @@ public class PlayerMovement : MonoBehaviour
         else if (!Input.GetButton("P" + playerNumber.ToString() + "Jump"))
         {
             jumping = false;
-        }
-
-        if (Input.GetButtonDown("P" + playerNumber.ToString() + "Punch"))
-        {
-            punching = true;
-        }
-        else if (!Input.GetButton("P" + playerNumber.ToString() + "Punch"))
-        {
-            punching = false;
         }
     }
 
