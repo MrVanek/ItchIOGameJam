@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BallHandling : MonoBehaviour
 {
@@ -60,14 +61,7 @@ public class BallHandling : MonoBehaviour
     {
         if (hasBall)
         {
-            ToggleCrosshair(false);
-            hasBall = false;
-            Rigidbody rb = ball.GetComponent<Rigidbody>();
-            rb.useGravity = true;
-            rb.detectCollisions = true;
-            rb.transform.position = rb.gameObject.transform.position + (transform.forward);
-            rb.AddForce(ball.transform.forward * throwSpeed, ForceMode.Impulse);
-            StartCoroutine("ballWait");
+            ThrowBall(false);
         }
 
         else if (punching)
@@ -80,15 +74,38 @@ public class BallHandling : MonoBehaviour
                    tarAnim.SetTrigger("Fall");
                    tarAnim.SetFloat("speedMultiplier", 1f);
                    target.GetComponent<PlayerMovement>().canMove = false;
-                    if (target.GetComponent<BallHandling>().hasBall)
+                    BallHandling tbh = target.GetComponent<BallHandling>();
+                    if (tbh.hasBall)
                     {
-                        //launch ball.
+                        tbh.ThrowBall(true);
+
                     }
                 }
             }
         }
     }
 
+    private void ThrowBall(bool randomDir)
+    {
+        ToggleCrosshair(false);
+        hasBall = false;
+        Rigidbody rb = ball.GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.detectCollisions = true;
+        rb.transform.position = rb.gameObject.transform.position + (transform.forward);
+        if (!randomDir)
+        {
+            rb.AddForce(ball.transform.forward * throwSpeed, ForceMode.Impulse);
+        }
+        else
+        {
+            Vector3 rand = new Vector3(Random.Range(-1f, 1f), Random.Range(-1, 1f), Random.Range(-1f, 1f));
+            
+            rb.AddForce(rand * throwSpeed * 1.5f, ForceMode.Impulse);
+        }
+            
+        StartCoroutine("ballWait");
+    }
 
     private IEnumerator ballWait()
     {
