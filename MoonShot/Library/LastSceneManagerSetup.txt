@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/SplitScreen.unity
+- path: Assets/Scenes/HTP.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

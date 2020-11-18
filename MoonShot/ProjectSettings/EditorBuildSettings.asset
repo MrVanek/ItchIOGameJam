@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/about.unity
     guid: 91138d81a4e89c14ab750c41c11f2e09
+  - enabled: 1
+    path: Assets/Scenes/HTP.unity
+    guid: 217cad4195434e5408c646bac38bf86e
   m_configObjects: {}

@@ -9,11 +9,14 @@ public class LoadScreen : MonoBehaviour
 {
 
     private int selected = 0;
+    private int maxThings = 3;
     public Font fontDeselected;
     public Font fontSelected;
     public Text ssText;
     public Text aboutText;
     public Text onlineText;
+    public Text htpText;
+
     private bool canSelect = true;
 
 
@@ -26,7 +29,7 @@ public class LoadScreen : MonoBehaviour
             DealWithInputs();
             ChangeFonts();
             SwitchScreens();
-        }else if (scene.buildIndex == 2)
+        }else //if (scene.buildIndex == 2)
         {
             GoBack();
         }
@@ -58,7 +61,10 @@ public class LoadScreen : MonoBehaviour
             {
                 SceneManager.LoadScene(2);
             }
-
+            else if (selected == 3)
+            {
+                SceneManager.LoadScene(3);
+            }
         }
     }
 
@@ -71,25 +77,31 @@ public class LoadScreen : MonoBehaviour
     {
        if (selected == 0)
       {
-            Debug.Log("Selcted 0");
             ssText.font = fontSelected;
             aboutText.font = fontDeselected;
             onlineText.font = fontDeselected;
-        
-      } else if (selected == 1)
+            htpText.font = fontDeselected;
+        }
+        else if (selected == 1)
         {
-            Debug.Log("Selcted 1");
             ssText.font = fontDeselected;
             aboutText.font = fontDeselected;
             onlineText.font = fontSelected;
-        
+            htpText.font = fontDeselected;
         }
-     else if (selected == 2)
+        else if (selected == 2)
         {
-            Debug.Log("Selcted 2");
             ssText.font = fontDeselected;
             aboutText.font = fontSelected;
             onlineText.font = fontDeselected;
+            htpText.font = fontDeselected;
+        }
+        else if (selected == 3)
+        {
+            ssText.font = fontDeselected;
+            aboutText.font = fontDeselected;
+            onlineText.font = fontDeselected;
+            htpText.font = fontSelected;
         }
     }
 
@@ -101,7 +113,7 @@ public class LoadScreen : MonoBehaviour
         if (Input.GetAxisRaw("P1Vertical") < -0.08f && canSelect)
         {
             selected++;
-            if (selected > 2)
+            if (selected > maxThings)
             {
                 selected = 0;
             }
@@ -112,7 +124,7 @@ public class LoadScreen : MonoBehaviour
             selected--;
             if (selected < 0)
             {
-                selected = 2;
+                selected = maxThings;
             }
             canSelect = false;
         }

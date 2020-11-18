@@ -1718,7 +1718,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 45a96ded86042a34a9a1a3c4a65d8f6a, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 23
     m_FontStyle: 1
     m_BestFit: 0
@@ -1730,30 +1730,30 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'MoonShot was created by zxqueb using
+  m_Text: 'MoonShot was created by Zxqueb using:
 
 
     Unity
 
     MagicaVoxel
 
+    Mixamo
+
     Reaper
 
 
 
-    except
+    Additional
+    resources:
 
 
-    animations
-    by mixamo
+    Android font by Issac K.
+
+    www.dafont.com/font-comment.php?file=android
 
 
-    android font by Issac K
-
-    dafont.com
-
-
-    music by  TBD'
+    music
+    by  TBD'
 --- !u!222 &731887063
 CanvasRenderer:
   m_ObjectHideFlags: 0

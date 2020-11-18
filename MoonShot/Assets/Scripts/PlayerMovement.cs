@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private float hMovement, vMovement, distanceToTheGround;
     private bool reachedApex = false;
     private bool jumping = false;
+    private bool punching = false;
 
 
     void Start()
@@ -53,6 +54,15 @@ public class PlayerMovement : MonoBehaviour
         {
             jumping = false;
         }
+
+        if (Input.GetButtonDown("P" + playerNumber.ToString() + "Punch"))
+        {
+            punching = true;
+        }
+        else if (!Input.GetButton("P" + playerNumber.ToString() + "Punch"))
+        {
+            punching = false;
+        }
     }
 
     private void CheckAnalogInputs()
@@ -67,7 +77,13 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
             JumpPlayer();
+           // punchPlayer();
         }
+    }
+
+    private void punchPlayer()
+    {
+        anim.SetTrigger("Throw");
     }
 
     private void MovePlayer()
