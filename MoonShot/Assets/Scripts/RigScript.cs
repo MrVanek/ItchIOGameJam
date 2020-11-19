@@ -8,15 +8,19 @@ public class RigScript : MonoBehaviour
     public Transform yPivot;
     public Transform xPivot;
 
-    public float rotationSpeed = 5f;
-    public float maxRotation = 45f;
-    public float minRotation = -20f;
+    private float rotationSpeed;
+    private float maxRotation;
+    private float minRotation;
 
     public int playerNumber = 1;
-
+    public playerValues pv;
 
     void Update()
     {
+        rotationSpeed = pv.rotationSpeed;
+        maxRotation = pv.maxRotation;
+        minRotation = pv.minRotation;
+
         PivotRotation();
     }
 

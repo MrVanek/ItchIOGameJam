@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ScoreHandling : MonoBehaviour
 {
+    public Transform ballSpawn;
     public Text P1Text;
     public Text P2Text;
     public Text WinText;
@@ -15,13 +16,6 @@ public class ScoreHandling : MonoBehaviour
 
     private int P1Score = 0;
     private int P2Score = 0;
-
-
-
-    void Start()
-    {
-        WinText.text = "";
-    }
 
 
     void Update()
@@ -49,11 +43,18 @@ public class ScoreHandling : MonoBehaviour
         {
             P1Score++;
             P1Text.text = "Score: " + P1Score.ToString();
+            transform.position = ballSpawn.position;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
         }
         else if (other.tag == "Player2Goal")
         {
             P2Score++;
             P2Text.text = "Score: " + P2Score.ToString();
+            transform.position = ballSpawn.position;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
         }
     }
+
 }

@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class BallHandling : MonoBehaviour
 {
     public Transform ballSpot;
-    public float throwSpeed = 5f;
+    private float throwSpeed;
     public ScoreHandling gamestate;
     public GameObject crosshairPrefab;
     public Camera myCamera;
@@ -21,9 +21,11 @@ public class BallHandling : MonoBehaviour
     private Animator anim;
     private GameObject ball, crosshair, target;
     private bool punching = false;
+    public playerValues pv;
 
     private void Start()
     {
+        throwSpeed = pv.throwSpeed;
         anim = GetComponentInChildren<Animator>();
         pm = GetComponent<PlayerMovement>();
         playerNumber = pm.playerNumber;

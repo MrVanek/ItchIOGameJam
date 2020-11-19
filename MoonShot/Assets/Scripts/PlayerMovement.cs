@@ -5,27 +5,35 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float rotateSpeed = 10f;
-    public float jumpForce = 6f;
+    private float moveSpeed;
+    private float rotateSpeed;
+    private float jumpForce;
+
+
     public Transform yPivot;
-    public float fallMultiplier = 1.5f;
-    public float lowMultiplier = 2f;
-    public float extraJumpDistance = 5f;
+    private float fallMultiplier;
+    private float lowMultiplier;
+    private float extraJumpDistance = .25f;
     public int playerNumber = 1;
 
     public bool canJump = true;
     private bool canCheckJump = true;
-    public bool canMove = true;
+    public bool canMove = false;
     private Rigidbody rb;
     private Animator anim;
     private float hMovement, vMovement, distanceToTheGround;
     private bool reachedApex = false;
     private bool jumping = false;
-
+    public playerValues pv;
 
     void Start()
     {
+        moveSpeed = pv.moveSpeed;
+        rotateSpeed = pv.rotateSpeed;
+        jumpForce = pv.jumpForce;
+        fallMultiplier = pv.fallMultiplier;
+        lowMultiplier = pv.lowMultiplier;
+
 
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
