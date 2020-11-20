@@ -24,26 +24,27 @@ public class PlayerMovement : MonoBehaviour
     private float hMovement, vMovement, distanceToTheGround;
     private bool reachedApex = false;
     private bool jumping = false;
-    public playerValues pv;
+    private playerValues pv;
 
     private AudioScript aud;
 
     void Start()
     {
+        pv = GameObject.FindGameObjectWithTag("Controller").GetComponent<playerValues>();
+
         moveSpeed = pv.moveSpeed;
         rotateSpeed = pv.rotateSpeed;
         jumpForce = pv.jumpForce;
         fallMultiplier = pv.fallMultiplier;
         lowMultiplier = pv.lowMultiplier;
 
-
+        
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         distanceToTheGround = GetComponent<CapsuleCollider>().bounds.extents.y;
 
-        aud = GameObject.FindGameObjectWithTag("Controller").GetComponent<AudioScript>();
+        aud = GetComponent<AudioScript>();
         //TEST
-        aud.PlaySound(aud.jumpP1);
     }
     private void Update()
     {
@@ -165,10 +166,10 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("Jump");
             canJump = false;
             canCheckJump = false;
-            if (playerNumber == 1) 
-                aud.PlaySound(aud.jumpP1);
-            else
-                aud.PlaySound(aud.jumpP2);
+            if (playerNumber == 1 && pv.soundOn)
+                aud.PlaySound(pv.jumpP1);
+            else if (playerNumber == 2 && pv.soundOn)
+                aud.PlaySound(pv.jumpP2);
 
         }
     }

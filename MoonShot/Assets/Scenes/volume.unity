@@ -417,10 +417,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fontDeselected: {fileID: 12800000, guid: 0503fde243024e34ca5daa8785f6ed31, type: 3}
   fontSelected: {fileID: 12800000, guid: 45a96ded86042a34a9a1a3c4a65d8f6a, type: 3}
-  ssText: {fileID: 0}
+  ssText: {fileID: 731887062}
   aboutText: {fileID: 1630772711}
-  onlineText: {fileID: 0}
+  onlineText: {fileID: 1602464527}
   htpText: {fileID: 0}
+  SoundText: {fileID: 0}
 --- !u!1001 &171747536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3232,7 +3233,7 @@ GameObject:
   - component: {fileID: 1602464527}
   - component: {fileID: 1602464526}
   m_Layer: 5
-  m_Name: Volume text (1)
+  m_Name: Music text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

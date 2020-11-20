@@ -27,13 +27,14 @@ public class BallHandling : MonoBehaviour
 
     private void Start()
     {
+        pv = GameObject.FindGameObjectWithTag("Controller").GetComponent<playerValues>();
         throwSpeed = pv.throwSpeed;
         anim = GetComponentInChildren<Animator>();
         pm = GetComponent<PlayerMovement>();
         playerNumber = pm.playerNumber;
         crosshair = Instantiate(crosshairPrefab);
         ToggleCrosshair(false);
-        aud = GameObject.FindGameObjectWithTag("Controller").GetComponent<AudioScript>();
+        aud = GetComponent<AudioScript>();
     }
 
 
@@ -46,10 +47,10 @@ public class BallHandling : MonoBehaviour
             if (Input.GetButtonDown("P" + playerNumber.ToString() + "Throw"))
             {
                 anim.SetTrigger("Throw");
-                if (playerNumber == 1)
-                    aud.PlaySound(aud.throwP1);
-                else
-                    aud.PlaySound(aud.throwP2);
+                if (playerNumber == 1 && pv.soundOn)
+                    aud.PlaySound(pv.throwP1);
+                else if (playerNumber == 2 && pv.soundOn)
+                    aud.PlaySound(pv.throwP2);
             }
 
             CarryBall();
@@ -81,7 +82,13 @@ public class BallHandling : MonoBehaviour
                 if (!tarAnim.GetCurrentAnimatorStateInfo(0).IsName("Sweep Fall 0") && !tarAnim.GetCurrentAnimatorStateInfo(0).IsName("Zombie Stand Up"))
                 {
                    tarAnim.SetTrigger("Fall");
-                   tarAnim.SetFloat("speedMultiplier", 1f);
+
+                    if (playerNumber == 1 && pv.soundOn)
+                        aud.PlaySound(pv.fallingP2);
+                    else if (playerNumber == 2 && pv.soundOn)
+                        aud.PlaySound(pv.fallingP1);
+
+                    tarAnim.SetFloat("speedMultiplier", 1f);
                    target.GetComponent<PlayerMovement>().canMove = false;
                     BallHandling tbh = target.GetComponent<BallHandling>();
                     if (tbh.hasBall)

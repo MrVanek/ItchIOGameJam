@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OnlineSetup.unity
     guid: 5f0d226ed6b067b40bbf02d9175ca5e7
+  - enabled: 1
+    path: Assets/Scenes/volume.unity
+    guid: 0a5ba8c94af0159438073f58ce09699e
   m_configObjects: {}

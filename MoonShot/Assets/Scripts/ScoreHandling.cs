@@ -18,11 +18,18 @@ public class ScoreHandling : MonoBehaviour
     private int P2Score = 0;
 
     private AudioScript aud;
+    private playerValues pv;
 
+
+    private void Start()
+    {
+        aud = GameObject.FindGameObjectWithTag("Controller").GetComponent<AudioScript>();
+        pv = GameObject.FindGameObjectWithTag("Controller").GetComponent<playerValues>();
+    }
     void Update()
     {
         CheckGameEnd();
-        aud = GameObject.FindGameObjectWithTag("Controller").GetComponent<AudioScript>();
+       
     }
 
     private void CheckGameEnd()
@@ -31,14 +38,14 @@ public class ScoreHandling : MonoBehaviour
         {
             WinText.text = "Player 1 Wins!";
             gameOver = true;
-            aud.PlaySound(aud.gameOverP1);
+            if (pv.soundOn) aud.PlaySound(pv.gameOverP1);
 
         }
         if (!gameOver && P2Score > endScore - 1)
         {
             WinText.text = "Player 2 Wins!";
             gameOver = true;
-            aud.PlaySound(aud.gameOverP2);
+            if (pv.soundOn) aud.PlaySound(pv.gameOverP2);
         }
     }
 
@@ -51,7 +58,7 @@ public class ScoreHandling : MonoBehaviour
             transform.position = ballSpawn.position;
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
-            aud.PlaySound(aud.goalP1);
+            if (pv.soundOn) aud.PlaySound(pv.goalP1);
         }
         else if (other.tag == "Player2Goal")
         {
@@ -60,7 +67,7 @@ public class ScoreHandling : MonoBehaviour
             transform.position = ballSpawn.position;
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
-            aud.PlaySound(aud.goalP2);
+            if (pv.soundOn) aud.PlaySound(pv.goalP2);
         }
     }
 

@@ -10,6 +10,9 @@ TagManager:
   - Ground
   - Bullet
   - Controller
+  - P1Score
+  - P2Score
+  - WhoWins
   layers:
   - Default
   - TransparentFX
