@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     private bool jumping = false;
     public playerValues pv;
 
+    private AudioScript aud;
+
     void Start()
     {
         moveSpeed = pv.moveSpeed;
@@ -38,6 +40,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         distanceToTheGround = GetComponent<CapsuleCollider>().bounds.extents.y;
+
+        aud = GameObject.FindGameObjectWithTag("Controller").GetComponent<AudioScript>();
+        //TEST
+        aud.PlaySound(aud.jumpP1);
     }
     private void Update()
     {
@@ -159,6 +165,11 @@ public class PlayerMovement : MonoBehaviour
             anim.SetTrigger("Jump");
             canJump = false;
             canCheckJump = false;
+            if (playerNumber == 1) 
+                aud.PlaySound(aud.jumpP1);
+            else
+                aud.PlaySound(aud.jumpP2);
+
         }
     }
 

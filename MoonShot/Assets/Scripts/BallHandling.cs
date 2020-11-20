@@ -23,6 +23,8 @@ public class BallHandling : MonoBehaviour
     private bool punching = false;
     public playerValues pv;
 
+    private AudioScript aud;
+
     private void Start()
     {
         throwSpeed = pv.throwSpeed;
@@ -31,6 +33,7 @@ public class BallHandling : MonoBehaviour
         playerNumber = pm.playerNumber;
         crosshair = Instantiate(crosshairPrefab);
         ToggleCrosshair(false);
+        aud = GameObject.FindGameObjectWithTag("Controller").GetComponent<AudioScript>();
     }
 
 
@@ -43,6 +46,10 @@ public class BallHandling : MonoBehaviour
             if (Input.GetButtonDown("P" + playerNumber.ToString() + "Throw"))
             {
                 anim.SetTrigger("Throw");
+                if (playerNumber == 1)
+                    aud.PlaySound(aud.throwP1);
+                else
+                    aud.PlaySound(aud.throwP2);
             }
 
             CarryBall();

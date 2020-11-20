@@ -8,6 +8,8 @@ TagManager:
   - Player1Goal
   - Player2Goal
   - Ground
+  - Bullet
+  - Controller
   layers:
   - Default
   - TransparentFX

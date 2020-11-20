@@ -7,13 +7,10 @@ public class rocketShipSctipt : MonoBehaviour
 {
 
     float rocketSpeed = 40;
-    float rocketRotation = 30;
 
     public Transform waypoint;
     private Transform[] points;
-    private int waypointHeading = 0;
-    private Transform headedTowards;
-    private bool stopShip = false;
+ 
     private Vector3 initialPosition;
 
 

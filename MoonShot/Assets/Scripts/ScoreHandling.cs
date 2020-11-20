@@ -17,10 +17,12 @@ public class ScoreHandling : MonoBehaviour
     private int P1Score = 0;
     private int P2Score = 0;
 
+    private AudioScript aud;
 
     void Update()
     {
         CheckGameEnd();
+        aud = GameObject.FindGameObjectWithTag("Controller").GetComponent<AudioScript>();
     }
 
     private void CheckGameEnd()
@@ -29,11 +31,14 @@ public class ScoreHandling : MonoBehaviour
         {
             WinText.text = "Player 1 Wins!";
             gameOver = true;
+            aud.PlaySound(aud.gameOverP1);
+
         }
         if (!gameOver && P2Score > endScore - 1)
         {
             WinText.text = "Player 2 Wins!";
             gameOver = true;
+            aud.PlaySound(aud.gameOverP2);
         }
     }
 
@@ -46,6 +51,7 @@ public class ScoreHandling : MonoBehaviour
             transform.position = ballSpawn.position;
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
+            aud.PlaySound(aud.goalP1);
         }
         else if (other.tag == "Player2Goal")
         {
@@ -54,6 +60,7 @@ public class ScoreHandling : MonoBehaviour
             transform.position = ballSpawn.position;
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
+            aud.PlaySound(aud.goalP2);
         }
     }
 

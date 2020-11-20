@@ -23,10 +23,12 @@ public class playerValues : MonoBehaviour
     public Text wt;
     public PlayerMovement p1;
     public PlayerMovement p2;
+    private AudioScript aud;
 
     // Start is called before the first frame update
     void Start()
     {
+        aud = GetComponent<AudioScript>();
         StartCoroutine("ReadyStart");
     }
     private IEnumerator ReadyStart()
@@ -34,6 +36,8 @@ public class playerValues : MonoBehaviour
         float count = 0;
 
         wt.text = "READY";
+        aud.PlaySound(aud.ready);
+
 
         while (count < 2f)
         {
@@ -42,13 +46,16 @@ public class playerValues : MonoBehaviour
         }
 
         wt.text = "Start!";
+        aud.PlaySound(aud.start);
 
         count = 0;
+
         while (count < .5f)
         {
             count += Time.deltaTime;
             yield return null;
         }
+
         p1.canMove = true;
         p2.canMove = true;
         wt.text = "";
