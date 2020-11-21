@@ -56,8 +56,12 @@ public class playerValues : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        soundOn = FindObjectOfType<SoundSettings>().soundOn;
-        musicOn = FindObjectOfType<SoundSettings>().musicOn;
+        SoundSettings sound = FindObjectOfType<SoundSettings>();
+        if (sound != null)
+        {
+            soundOn = FindObjectOfType<SoundSettings>().soundOn;
+            musicOn = FindObjectOfType<SoundSettings>().musicOn;
+        }
             aud = GetComponent<AudioScript>();
             if (musicOn)
             {

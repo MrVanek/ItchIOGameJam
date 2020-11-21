@@ -101,7 +101,7 @@ public class LoadScreen : MonoBehaviour
     {
         if (Input.GetButtonDown("P1Jump"))
         {
-            aud.PlaySound(aud.click);
+            if (ss.soundOn) aud.PlaySound(aud.click);
             if (selected == 0)
             {
                 ss.soundOn = !ss.soundOn;
@@ -214,7 +214,11 @@ public class LoadScreen : MonoBehaviour
 
     private void DealWithInputs()
     {
-        
+        if (Input.GetButtonDown("P1Throw") && scene.buildIndex != 0)
+        {
+            GoBack();
+        }
+
         if (Input.GetAxisRaw("P1Vertical") < -0.08f && canSelect)
         {
             selected++;
@@ -240,9 +244,6 @@ public class LoadScreen : MonoBehaviour
             canSelect = true;
         }
 
-        if (Input.GetButtonDown("P1Throw") && scene.buildIndex != 0)
-        {
-            GoBack();
-        }
+
     }
 }
