@@ -13,8 +13,6 @@ TagManager:
   - P1Score
   - P2Score
   - WhoWins
-  - menuSound
-  - SoundSettings
   layers:
   - Default
   - TransparentFX
